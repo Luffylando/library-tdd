@@ -15,7 +15,10 @@ class BooksController extends Controller
             'title' => 'required',
             'author' => 'required'
         ]);
-        Book::create($data);
+        $book = Book::create($data);
+        return redirect($book->path());
+
+        //path funkciju smo napravili u Book Modelu.
     }
 
     public function update(Book $book)
@@ -25,5 +28,12 @@ class BooksController extends Controller
             'author' => 'required'
         ]);
         $book->update($data);
+        return redirect($book->path());
+    }
+
+    public function destroy(Book $book)
+    {
+        $book->delete();
+        return redirect('/books');
     }
 }

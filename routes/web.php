@@ -18,4 +18,7 @@ Route::get('/', function () {
 });
 
 Route::post('/books', 'App\Http\Controllers\BooksController@store');
-Route::patch('/books/{book}', 'App\Http\Controllers\BooksController@update');
+Route::patch('/books/{book}-{slug}', 'App\Http\Controllers\BooksController@update');
+Route::delete('/books/{book}-{slug}', 'App\Http\Controllers\BooksController@destroy');
+
+Route::post('/author', 'App\Http\Controllers\AuthorsController@store');
