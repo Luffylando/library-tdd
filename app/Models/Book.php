@@ -11,12 +11,19 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'author'];
+    protected $guarded = [];
 
     public function path()
     {
         return '/books/' . $this->id . '-' . Str::slug($this->title);
 
         // address will look like: /books/1-the-republic
+    }
+
+    public function setAuthorIdAttribute($author)
+    {
+        $this->attributes['author_id'] = (Author::firstOrCreate([
+            'name' => $author,
+        ]))->id;
     }
 }
